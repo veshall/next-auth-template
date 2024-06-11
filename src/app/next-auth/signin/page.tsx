@@ -17,7 +17,7 @@ export default function Page() {
         <CardHeader className="flex flex-col justify-center items-center">
           <CardTitle>Sign in to AuNext</CardTitle>
           <CardDescription>
-            Welcome back! Please sign in to continue
+            Welcome back! Please sign in to continue.
           </CardDescription>
         </CardHeader>
         <CardContent>
