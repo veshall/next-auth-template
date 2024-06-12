@@ -15,7 +15,9 @@ export default function HeaderBar() {
           <Link href="/next-auth/signin">
             <Button variant="default">Sign In</Button>
           </Link>
+          <Link href="/next-auth/signup">
           <Button variant="ghost">Sign Up</Button>
+          </Link>
         </div>
       </div>
     </div>

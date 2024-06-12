@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-export default function SigninPage() {
+export default function SignupPage() {
   return (
     <main className="h-full flex justify-center items-center">
       <Card>
@@ -25,8 +25,8 @@ export default function SigninPage() {
         </CardContent>
         <CardFooter>
           <p className="text-sm text-zinc-800">
-            Don't have an account?
-            <Button variant="link">Sign up</Button>
+            Already have an account?
+            <Button variant="link">Sign in</Button>
           </p>
         </CardFooter>
       </Card>
