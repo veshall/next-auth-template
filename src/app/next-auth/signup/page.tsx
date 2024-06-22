@@ -17,6 +17,8 @@ import { z } from "zod";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import { passwordStrength } from "check-password-strength";
 import { cn } from "@/lib/utils";
+import { registerUser } from "@/lib/actions/auth-actions";
+import { toast } from "sonner";
 
 type InputType = z.infer<typeof formSchema>;
 
@@ -31,7 +33,7 @@ export interface passStrengthProps {
 
 const formSchema = z
   .object({
-    email: z.string().email("Please type a valid email"),
+    email: z.string().trim().email("Please type a valid email"),
     password: z
       .string()
       .trim()
@@ -50,6 +52,7 @@ const formSchema = z
 
 export default function SigninFormPage() {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [isPassFocus, setIsPassFocus] = useState(false);
   const [passStrength, setPassStrength] = useState<passStrengthProps>({
     id: 0,
     value: "",
@@ -65,7 +68,17 @@ export default function SigninFormPage() {
     setPassStrength(passwordStrength(form.watch().password));
   }, [form.watch().password]);
 
-  const processForm: SubmitHandler<InputType> = async (formData) => {};
+  const processForm: SubmitHandler<InputType> = async (formData) => {
+    const { confirmPassword, ...user } = formData;
+
+    try {
+      const response = await registerUser(user);
+      toast.success("Account created successfully!");
+    } catch (error) {
+      toast.error("Something went wrong!");
+      console.log(error);
+    }
+  };
 
   return (
     <Form {...form}>
@@ -98,8 +111,10 @@ export default function SigninFormPage() {
                 <div>
                   <Input
                     type={passwordVisible ? "text" : "password"}
-                    placeholder="********"
                     {...field}
+                    placeholder="********"
+                    onFocus={() => setIsPassFocus(true)}
+                    onBlur={() => setIsPassFocus(false)}
                   />
 
                   <p
@@ -123,6 +138,7 @@ export default function SigninFormPage() {
                     className="absolute w-4 h-4 right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
                   />
                 </div>
+                {/* {isPassFocus ? } */}
               </FormControl>
             </FormItem>
           )}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../ui/button";
+import { Button } from "./ui/button";
 import { GitHubLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
 
 interface SocialBtnProps {

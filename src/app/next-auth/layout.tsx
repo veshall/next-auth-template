@@ -1,4 +1,6 @@
-import React, { ReactNode } from "react";
+"use client";
+
+import React from "react";
 import {
   Card,
   CardContent,
@@ -9,14 +11,17 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import SocialLoginBtn from "@/components/forms/social-login-btn";
-import Image from "next/image";
+import SocialLoginBtn from "@/components/social-login-btn";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function SigninLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const path = usePathname();
+  const currentpath = path.split("/").pop();
   return (
     <main>
       <div className="bg-gradient-to-br from-teal-100 to-purple-200 container grid h-svh flex-col items-center justify-center bg-primary-foreground lg:max-w-none lg:px-0">
@@ -43,7 +48,9 @@ export default function SigninLayout({
                 </div>
               </CardTitle>
               <CardDescription className="self-center text-sm">
-                Welcome back! Please sign in to continue.
+                {currentpath !== "signup"
+                  ? "Welcome back! Please sign in to continue"
+                  : "Welcome! Please fill in the details to get started"}
               </CardDescription>
             </CardHeader>
             <CardContent className="p-0">
@@ -66,9 +73,24 @@ export default function SigninLayout({
           </div>
           <CardFooter className="px-5 py-3 flex flex-col text-sm font-medium items-center justify-center text-muted-foreground">
             <p>
-              Don't have an account?
-              <Button className="px-1 text-violet-700 text-sm" variant="link">
-                Sign up
+              {currentpath !== "signup"
+                ? "Don't have an account?"
+                : "Already have an account?"}
+
+              <Button
+                className="px-1 text-violet-700 text-sm"
+                variant="link"
+                asChild
+              >
+                <Link
+                  href={
+                    currentpath !== "signup"
+                      ? "/next-auth/signup"
+                      : "/next-auth/signin"
+                  }
+                >
+                  {currentpath !== "signup" ? "Sign Up" : "Sign In"}
+                </Link>
               </Button>
             </p>
 
