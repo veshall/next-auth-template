@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Form,
   FormControl,
@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { EyeIcon } from "@heroicons/react/24/solid";
@@ -25,12 +25,19 @@ const formSchema = z.object({
 });
 
 export default function SigninFormPage() {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   const form = useForm<InputType>({
     resolver: zodResolver(formSchema),
   });
+
+  const processForm: SubmitHandler<InputType> = async (formData) => {
+    console.log(formData);
+  };
+
   return (
     <Form {...form}>
-      <form className="space-y-4">
+      <form onSubmit={form.handleSubmit(processForm)} className="space-y-4">
         <FormField
           control={form.control}
           name="email"
@@ -61,9 +68,20 @@ export default function SigninFormPage() {
                 </Link>
               </div>
               <FormControl className="relative">
-                <div className="relative">
-                  <EyeIcon className="absolute w-4 h-4 right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer" />
-                  <Input type="password" placeholder="********" {...field} />
+                <div>
+                  <div className="relative">
+                    <EyeIcon className="absolute w-4 h-4 right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer" />
+                    <Input
+                      type={passwordVisible ? "text" : "password"}
+                      placeholder="********"
+                      {...field}
+                    />
+                  </div>
+                  <EyeIcon
+                    onMouseDown={() => setPasswordVisible(true)}
+                    onMouseUp={() => setPasswordVisible(false)}
+                    className="absolute w-4 h-4 right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
+                  />
                 </div>
               </FormControl>
 
@@ -72,8 +90,11 @@ export default function SigninFormPage() {
           )}
         />
 
-        <Button type="submit" className="min-w-full">
-          Submit
+        <Button
+          type="submit"
+          className="min-w-full disabled:cursor-not-allowed"
+        >
+          Continue
         </Button>
       </form>
     </Form>

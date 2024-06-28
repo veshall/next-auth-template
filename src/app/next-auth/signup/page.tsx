@@ -164,7 +164,7 @@ export default function SigninFormPage() {
         />
 
         <Button type="submit" className="min-w-full">
-          Submit
+          Continue
         </Button>
       </form>
     </Form>

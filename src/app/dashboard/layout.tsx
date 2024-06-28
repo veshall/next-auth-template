@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderBar from "@/components/header-bar";
+import HeaderBar from "../../components/header-bar";
 
 export default function layout({ children }: { children: React.ReactNode }) {
   return (
