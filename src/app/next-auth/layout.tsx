@@ -15,7 +15,7 @@ import SocialLoginBtn from "@/components/social-login-btn";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function SigninLayout({
+export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode;

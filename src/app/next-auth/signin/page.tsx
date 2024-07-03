@@ -16,24 +16,28 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type InputType = z.infer<typeof formSchema>;
+
+interface Props {
+  callbakeUrl?: string;
+}
 
 const formSchema = z.object({
   email: z.string().email("Please type a valid email"),
   password: z.string().min(1, { message: "Please type your password!" }),
 });
 
-export default function SigninFormPage() {
+export default function SigninFormPage({ props }: Props) {
+  const router = useRouter();
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const form = useForm<InputType>({
     resolver: zodResolver(formSchema),
   });
 
-  const processForm: SubmitHandler<InputType> = async (formData) => {
-    console.log(formData);
-  };
+  const processForm: SubmitHandler<InputType> = async (formData) => {};
 
   return (
     <Form {...form}>
