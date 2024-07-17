@@ -10,4 +10,6 @@ I'm using sqlite but you can use whatever db you want by adding the reqiured fil
 
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [Typescript](https://www.typescriptlang.org/)
 - [shadcn/ui](https://ui.shadcn.com/)
+- [Zod](https://zod.dev/)
