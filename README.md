@@ -13,3 +13,5 @@ I'm using sqlite but you can use whatever db you want by adding the reqiured fil
 - [Typescript](https://www.typescriptlang.org/)
 - [shadcn/ui](https://ui.shadcn.com/)
 - [Zod](https://zod.dev/)
+- [React hook form](https://www.react-hook-form.com/)
+
