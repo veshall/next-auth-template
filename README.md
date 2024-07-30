@@ -6,7 +6,7 @@ I'm using sqlite but you can use whatever db you want by adding the reqiured fil
 
 - **Inbuilt Next-Auth :** Easily secure you project with a few tweeks.
 
-## Built with
+## Tech used
 
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
